@@ -10,6 +10,18 @@ class Settings(BaseSettings):
     """Application configuration loaded from environment and CLI."""
 
     log_level: str = Field("INFO")
+    sampling_factor: int = Field(1, ge=1, description="Process every Nth update.")
+    exclusion_center_lat: float | None = Field(
+        None, description="Center latitude for the exclusion zone."
+    )
+    exclusion_center_lon: float | None = Field(
+        None, description="Center longitude for the exclusion zone."
+    )
+    exclusion_margin_deg: float = Field(
+        0.0,
+        ge=0.0,
+        description="Half-size in degrees for the exclusion zone bounds.",
+    )
 
     model_config = {
         "env_prefix": "MDS3_",
